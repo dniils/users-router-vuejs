@@ -1,9 +1,19 @@
-import { createStore } from "vuex";
+import { defineStore } from "pinia";
 
-export default createStore({
-  state: {},
+export const useUsersStore = defineStore("users", {
+  state: () => ({ users: [], individualUsers: {} }),
   getters: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+  actions: {
+    async fetchUsers() {
+      const f = await fetch("https://reqres.in/api/users");
+      const { data } = await f.json();
+      this.users = await data;
+    },
+
+    async fetchOneUser(userIdentificator) {
+      const f = await fetch(`https://reqres.in/api/users/${userIdentificator}`);
+      const { data } = await f.json();
+      this.individualUsers[userIdentificator] = await data;
+    },
+  },
 });
