@@ -1,9 +1,9 @@
 <template>
-  <header class="header">
+  <!-- <header class="header">
     <router-link class="router-link" to="/">
       <h1>Users</h1>
     </router-link>
-  </header>
+  </header> -->
   <router-view />
 </template>
 

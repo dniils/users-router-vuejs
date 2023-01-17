@@ -56,18 +56,30 @@ if (!store.individualUsers[route.params.userID])
 </script>
 
 <style lang="scss" scoped>
+@media (max-width: 600px) {
+  .user-profile {
+    width: 300px !important;
+  }
+
+  .user-profile-wrapper {
+    margin: 25px auto !important;
+  }
+}
+
 .user-view {
   .user-profile-wrapper {
-    width: 500px;
     margin: 50px auto;
-    padding-top: 50px;
   }
 
   .user-profile {
-    padding: 50px 0;
+    width: 400px;
     display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 50px 0;
     flex-direction: column;
-    border: 2px dashed rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+    box-shadow: inset 0 0px 10px rgb(0 0 0 / 0.1);
 
     &__alert-message {
       color: red;
@@ -76,6 +88,7 @@ if (!store.individualUsers[route.params.userID])
 
     &__avatar {
       width: 200px;
+      height: 200px;
       border-radius: 50%;
       box-shadow: 0 4px 7px 0px rgb(0, 0, 0, 0.3);
       margin: 0 auto 1em;
@@ -84,6 +97,7 @@ if (!store.individualUsers[route.params.userID])
     &__info {
       margin: 0 auto;
       h1 {
+        text-align: center;
         margin-bottom: 0.5em;
       }
     }
