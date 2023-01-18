@@ -20,7 +20,7 @@
       </div>
       <button
         class="users__btn-load-more"
-        :disabled="!store.weHaveMoreUsersToLoad"
+        :disabled="store.pageToRequest === store.totalPages"
         @click="store.fetchMoreUsers()"
       >
         Load more

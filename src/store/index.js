@@ -4,15 +4,18 @@ export const useUsersStore = defineStore("users", {
   state: () => ({
     users: [],
     individualUsers: {},
+    totalPages: null,
     pageToRequest: 1,
-    weHaveMoreUsersToLoad: true,
   }),
   getters: {},
   actions: {
     async fetchUsers() {
-      const f = await fetch("https://reqres.in/api/users?page=1");
-      const { data } = await f.json();
+      const f = await fetch(
+        `https://reqres.in/api/users?page=${this.pageToRequest}`
+      );
+      const { data, total_pages } = await f.json();
       this.users = await data;
+      this.totalPages = total_pages;
     },
 
     async fetchOneUser(userIdentificator) {
@@ -22,20 +25,12 @@ export const useUsersStore = defineStore("users", {
     },
 
     async fetchMoreUsers() {
-      if (this.weHaveMoreUsersToLoad) {
-        this.pageToRequest++;
-        const f = await fetch(
-          `https://reqres.in/api/users?page=${this.pageToRequest}`
-        );
-        const { data } = await f.json();
-
-        if (data.length) {
-          this.users = [...this.users, ...data];
-        } else {
-          this.weHaveMoreUsersToLoad = false;
-          alert("That's all we got!");
-        }
-      }
+      this.pageToRequest++;
+      const f = await fetch(
+        `https://reqres.in/api/users?page=${this.pageToRequest}`
+      );
+      const { data } = await f.json();
+      this.users = [...this.users, ...data];
     },
   },
 });
